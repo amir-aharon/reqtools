@@ -1,4 +1,4 @@
-# greps
+# reqtools
 
 [![License](https://img.shields.io/github/license/amir-aharon/reqtools)](https://github.com/amir-aharon/reqtools/blob/main/LICENSE)
 ![Python](https://img.shields.io/badge/python-3.13%2B-blue)
