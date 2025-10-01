@@ -1,6 +1,12 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 
 app = FastAPI(title="ReqTools Mock API")
+
+
+@app.post("/echo")
+async def echo(request: Request):
+    data = await request.json()
+    return {"echo": data}
 
 
 @app.get("/")

@@ -17,11 +17,13 @@ run-server:
 
 setup-dev:
 	uv sync --all-extras
-
+	uv run pre-commit install
+	
 test:
-	uv run pytest
+	PYTHONPATH=. uv run pytest
 
 lint:
+	uv run black --check .
 	uv run ruff check .
 	uv run mypy .
 
