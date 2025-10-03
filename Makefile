@@ -13,7 +13,7 @@ help:
 	@echo "  help          Show this help message"
 
 run-server:
-	uv run uvicorn mock_server.server:app --reload --port 8000
+	uv run uvicorn reqtools.mock_server.server:app --reload --port 8000
 
 setup-dev:
 	uv sync --all-extras
@@ -23,11 +23,13 @@ test:
 	PYTHONPATH=. uv run pytest
 
 lint:
+	uv run isort --check-only .
 	uv run black --check .
 	uv run ruff check .
 	uv run mypy .
 
 format:
+	uv run isort .
 	uv run black .
 	uv run ruff check --fix .
 

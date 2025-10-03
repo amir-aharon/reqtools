@@ -1,4 +1,5 @@
 from fastapi.testclient import TestClient
+
 from reqtools.mock_server.server import app
 
 client = TestClient(app)
