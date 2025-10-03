@@ -20,7 +20,7 @@ setup-dev:
 	uv run pre-commit install
 	
 test:
-	PYTHONPATH=. uv run pytest
+	PYTHONPATH=. uv run pytest || [ $$? -eq 5 ]
 
 lint:
 	uv run isort --check-only .

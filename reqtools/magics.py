@@ -7,9 +7,9 @@ from IPython import get_ipython
 from IPython.core.magic import Magics, line_magic, magics_class
 from requests import PreparedRequest, Request, Response
 
-from reqtools.extension.http.display import HTTPMessage
-from reqtools.extension.http.utils import run_parsed_context
-from reqtools.extension.jq.processor import run_jq
+from reqtools.http.display import HTTPMessage
+from reqtools.http.utils import run_parsed_context
+from reqtools.jq.processor import run_jq
 
 __all__ = ["ReqToolsMagics", "load_ipython_extension"]
 

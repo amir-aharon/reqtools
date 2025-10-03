@@ -1,6 +1,6 @@
 import requests
 
-from reqtools.extension.http.display import ParsedContext
+from reqtools.http.display import ParsedContext
 
 
 def run_parsed_context(ctx: ParsedContext) -> requests.Response:
