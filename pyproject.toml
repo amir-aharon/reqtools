@@ -1,6 +1,6 @@
 [project]
 name = "magic-reqtools"
-version = "0.1.1"
+version = "0.2.0"
 description = "IPython magics and helpers for working with HTTP requests"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -34,7 +34,7 @@ dev = [
 ]
 
 [tool.bumpversion]
-current_version = "0.1.1"
+current_version = "0.2.0"
 parse = "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)"
 serialize = ["{major}.{minor}.{patch}"]
 search = "version = \"{current_version}\""
