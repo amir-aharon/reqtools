@@ -1,0 +1,42 @@
+name: release
+on:
+  push:
+    tags:
+      - "v*"
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.13"
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+      - uses: actions/cache@v3
+        id: cached-uv-dependencies
+        with:
+          path: .venv
+          key: venv-Linux-3.13-${{ hashFiles('**/uv.lock') }}
+      - name: Install dependencies
+        run: uv sync --group dev
+      - name: build
+        run: make build
+      - name: Sanity test
+        run: |
+          uv run pip install dist/*.whl --force-reinstall
+          uv run ipython -c "%load_ext reqtools"
+      - name: create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            dist/*
+      - name: upload to pypi
+        run: uv publish
+        env:
+          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_TOKEN }}
