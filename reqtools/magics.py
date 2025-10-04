@@ -102,6 +102,15 @@ class ReqToolsMagics(Magics):
         result = run_jq(data=data, query=query, quiet=quiet)
         return result
 
+    def _get_user_namespace(self):
+        """Safely get user namespace."""
+        ip = get_ipython()
+        if ip is None:
+            raise RuntimeError("Not running in IPython environment")
+        if not hasattr(ip, "user_ns"):
+            raise RuntimeError("IPython instance has no user_ns")
+        return ip.user_ns
+
     def _display_http_object(
         self, line: str, expected_type, factory_method, type_name: str
     ):
@@ -110,9 +119,9 @@ class ReqToolsMagics(Magics):
             print(f"Usage: %{type_name[:3]} <{type_name}_variable>")
             return None
 
-        ip = get_ipython()
         try:
-            obj = eval(line.strip(), ip.user_ns)
+            user_ns = self._get_user_namespace()
+            obj = eval(line.strip(), user_ns)
         except Exception as e:
             print(f"Error evaluating '{line}': {e}")
             return None
